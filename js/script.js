@@ -2,32 +2,47 @@
 Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
+let varInterval;
 
-// Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
-
-// Create the array of quote objects and name it `quotes`.
+//create array to hold quotes
 let quotes = [
   {
-    quote: "quote 1",
-    source: "quote1-src",
-    citation: "quote1-cit",
-    year: "quote1-year"
+    quote:
+      "Nothing can stop a will that will stake even its existence to the extent of his purpose",
+    source: "Benjamin Isareli",
+    citation: null,
+    year: null,
+    tags:"Motivation"
   },
   {
-    quote: "quote 2",
-    source: "quote2-src",
-    citation: "quote2-cit",
-    year: "quote2-year"
+    quote: "I can do all things throw Christ who strengthens me.",
+    source: "Bible",
+    citation: "Philians 4:12",
+    year: "AD 62",
+    tags: null
   },
   {
-    quote: "quote 3",
-    source: "quote3-src",
-    citation: "quote3-cit",
-    year: "quote3-year"
+    quote: "You teach what you know but you produce who you are.",
+    source: "Bishop J.C. Harsh",
+    citation: "Sunday Sermon",
+    year: "2015",
+    tags: "Life Essential"
+  },
+  {
+    quote: "Luck is when oportunity meets preparedness.",
+    source: "Shannon Sharp",
+    citation: "Undisputed",
+    year: "2019",
+    tags: null
+  },
+  {
+    quote: "I will never leave you not forsake, says the Lord Almight.",
+    source: "Bible",
+    citation: "Hebrews 5:8",
+    year: null,
+    tags: null
   }
 ];
-
-// console.log(quotes[0].quote);
 
 const getRandomQuote = () => {
   let randomNumber = Math.floor(Math.random() * (quotes.length - 1));
@@ -35,47 +50,36 @@ const getRandomQuote = () => {
 };
 
 const printQuote = () => {
-  let randomQuote = getRandomQuote();
   let quoteContainer = document.getElementById("quote-box");
-  let pageContainer = document.querySelector('body');
+  let pageContainer = document.querySelector("body");
   let innerHTMLContent = "";
-  innerHTMLContent +=
-    '<p class="quote">' +
-    randomQuote.quote +
-    '</p><p class="source">' +
-    randomQuote.source +
-    '<span class="citation">' +
-    randomQuote.citation +
-    '</span><span class="year">' +
-    randomQuote.year +
-    "</span></p>";
+  let randomQuote = getRandomQuote();
 
+  console.log(randomQuote.citation);
+  innerHTMLContent += '<p class="quote">' + randomQuote.quote + "</p>";
+  if (randomQuote.source) {
+    innerHTMLContent += '<p class="source">' + randomQuote.source;
+  }
+  if (randomQuote.citation) {
+    innerHTMLContent +=
+      '<span class="citation">' + randomQuote.citation + "</span>";
+  }
+  if (randomQuote.year) {
+    innerHTMLContent +=
+      '<span class="year">' + randomQuote.year + "</span>";
+  }
+  if (randomQuote.tags) {
+    innerHTMLContent +=
+      '<span class="tags">' + randomQuote.tags + "</span></p>";
+  }
   quoteContainer.innerHTML = innerHTMLContent;
   pageContainer.style.backgroundColor =
     pageContainer.style.backgroundColor == "green" ? "blue" : "green";
 };
-/***
-  Create the `printQuote` function to: 
-   - Call the `getRandomQuote` function and assign it to a variable.
-   - Create a variable for the HTML string and set it equal to an empty string.
-   - Use the HTML template in the instructions or the markup in the index.html file, AND 
-     the random quote vairable to build your HTML string.
-   - Add the quote and source section to the HTML string.
-   - Use an if statement to check for the citation property before adding it to the HTML string.
-   - Use an if statement to check for the year property before adding it to the HTML string.
-   - Don't forget to close that final `p` tag.
-   - Set the `innerHTML` of the `quote-box` div to the HTML string. 
-***/
-
-/***
-  When the "Show another quote" button is clicked, the event listener 
-  below will be triggered, and it will call, or "invoke", the `printQuote` 
-  function. So do not make any changes to the line of code below this 
-  comment.
-***/
 
 document
   .getElementById("loadQuote")
   .addEventListener("click", printQuote, false);
 
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
+//Automatically switch quote after 10s and returns interval ID to clear setInterval
+varInterval = setInterval(printQuote, 20000);
