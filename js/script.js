@@ -10,16 +10,13 @@ let quotes = [
     quote:
       "Nothing can stop a will that will stake even its existence to the extent of his purpose",
     source: "Benjamin Isareli",
-    citation: null,
-    year: null,
-    tags:"Motivation"
+    tags: "Motivation"
   },
   {
-    quote: "I can do all things throw Christ who strengthens me.",
+    quote: "I can do all things through Christ who strengthens me.",
     source: "Bible",
     citation: "Philians 4:12",
-    year: "AD 62",
-    tags: null
+    year: "AD 62"
   },
   {
     quote: "You teach what you know but you produce who you are.",
@@ -32,24 +29,26 @@ let quotes = [
     quote: "Luck is when oportunity meets preparedness.",
     source: "Shannon Sharp",
     citation: "Undisputed",
-    year: "2019",
-    tags: null
+    year: "2019"
   },
   {
     quote: "I will never leave you not forsake, says the Lord Almight.",
     source: "Bible",
-    citation: "Hebrews 5:8",
-    year: null,
-    tags: null
+    citation: "Hebrews 5:8"
   }
 ];
 
 const getRandomQuote = () => {
-  let randomNumber = Math.floor(Math.random() * (quotes.length - 1));
+  //function generates random number and use that number
+  //to select a quote from 'quotes' array and return it
+  let randomNumber = Math.floor(Math.random() * quotes.length);
   return quotes[randomNumber];
 };
 
 const printQuote = () => {
+  //function manipulates DOM to render quote
+  //calling fn getRandomQuote which returns,
+  //quote to be render on webpage.
   let quoteContainer = document.getElementById("quote-box");
   let pageContainer = document.querySelector("body");
   let innerHTMLContent = "";
@@ -65,13 +64,14 @@ const printQuote = () => {
       '<span class="citation">' + randomQuote.citation + "</span>";
   }
   if (randomQuote.year) {
-    innerHTMLContent +=
-      '<span class="year">' + randomQuote.year + "</span>";
+    innerHTMLContent += '<span class="year">' + randomQuote.year + "</span>";
   }
   if (randomQuote.tags) {
-    innerHTMLContent +=
-      '<span class="tags">' + randomQuote.tags + "</span></p>";
+    innerHTMLContent += '<span class="tags">' + randomQuote.tags + "</span>";
   }
+
+  innerHTMLContent += "</p>";
+
   quoteContainer.innerHTML = innerHTMLContent;
   pageContainer.style.backgroundColor =
     pageContainer.style.backgroundColor == "green" ? "blue" : "green";
